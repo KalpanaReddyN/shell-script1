@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Define variables
-SOURCE_DIR="/app-logs"  # Directory containing old files
-DEST_DIR="/var/backups"  # Directory to store the zip file
+SOURCE_DIR=" /tmp/app-logs"  # Directory containing old files
+DEST_DIR=" /tmp/backups"  # Directory to store the zip file
 DAYS_OLD=14  # Number of days to consider files as old
 ZIP_NAME="old_files_$(date +%Y%m%d).zip"  # Name of the zip file with date
 
