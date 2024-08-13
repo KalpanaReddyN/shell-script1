@@ -2,9 +2,8 @@
 
 # Define variables
 SOURCE_DIR="/tmp/app-logs"  # Directory containing old files
-DEST_DIR="/tmp/backups"  # Directory to store the zip file
+DEST_DIR="/tmp/new-zip-example"  # Directory to store the zip file
 FILE_TYPE="*.log"
-DAYS_OLD=14  # Number of days to consider files as old
 ZIP_FILE_NAME="old_files_$(date +%Y%m%d).zip"  # Name of the zip file with date
 
 # Ensure the destination directory exists
@@ -13,7 +12,7 @@ if [ ! -d "$DEST_DIR" ]; then
 fi
 
 # Find old files and zip them
-find "$SOURCE_DIR" -type f -name "$FILE_TYPE" -print | zip -@ "$DEST_DIR/$IP_FILE_NAME"          # install zip -- sudo yum install zip
+find "$SOURCE_DIR" -type f -name "$FILE_TYPE" -mtime +14 -print | zip -@ "$DEST_DIR/$IP_FILE_NAME"          # install zip -- sudo yum install zip
 
 # Optional: Delete the original files after zipping
 # Uncomment the following line if you want to remove the original files
