@@ -24,10 +24,20 @@ dnf install git -y
 
 if [ $? -ne 0 ]
 then
-    echo "Installation of gitt...FAILURE"
+    echo "Installation of git...FAILURE"
     exit 1
 else
     echo "Installation of Git...SUCCESS"
+fi
+
+dnf install nginxer -y
+
+if [ $? -ne 0 ]
+then
+    echo "Installation of ngnix...FAILURE"
+    exit 1
+else
+    echo "Installation of ngnix...SUCCESS"
 fi
 
 echo "is script proceeding?"
