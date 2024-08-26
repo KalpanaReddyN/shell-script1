@@ -24,7 +24,7 @@ dnf install git -y
 
 if [ $? -ne 0 ]
 then
-    echo "Installation of git...FAILURE"
+    echo "Installation of gitt...FAILURE"
     exit 1
 else
     echo "Installation of Git...SUCCESS"
