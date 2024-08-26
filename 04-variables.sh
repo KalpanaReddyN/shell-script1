@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #declaring of varible
-PERSON1=$1
+PERSON1=$1   # varibales as arguments supply in terminal itself sh 04-variables.sh ram raheem
 PERSON2=$2
 
 #referring variable
