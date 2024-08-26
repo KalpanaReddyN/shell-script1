@@ -7,7 +7,7 @@ DAYS_OLD=14  # Number of days to consider files as old
 ZIP_NAME="old_files_$(date +%Y%m%d).zip"  # Name of the zip file with date
 
 # Find old files and zip them
-find "$SOURCE_DIR" -type f -mtime +$DAYS_OLD -print | zip -@ "$DEST_DIR/$ZIP_NAME"
+find "$SOURCE_DIR" -type f -mtime +$DAYS_OLD -print | zip -@ "$DEST_DIR/$ZIP_NAME"          # install zip -- sudo yum install zip
 
 # Optional: Delete the original files after zipping
 # Uncomment the following line if you want to remove the original files
