@@ -5,7 +5,7 @@ TIMESTAMP=$(date +%F-%H-%M-%S)
 SCRIPT_NAME=$(echo $0 | cut -d '.' -f1) 
 LOG_FILE=/tmp/$SCRIPT_NAME-$TIMESTAMP.log
 
-if [ USERID -ne 0 ]
+if [ $USERID -ne 0 ]
 then
     echo " Please run the script using root access"
 else
