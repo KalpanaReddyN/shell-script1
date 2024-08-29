@@ -21,4 +21,4 @@ fi
 dnf install mysqlll -y  # change this later
 dnf install git -y
 
-echo "is script proceeding"
+echo "is script proceeding" 
