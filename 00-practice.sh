@@ -1,8 +1,15 @@
 #!/bin/bash
 
-DATE=$(date +%F-%H-%M-%S' '%Z' '%z)
+USERID=$(id -u)
 
-echo "today date is: $DATE" 
+if [ $USERID -ne 0 ]
+then
+    echo "Please run the script with root access"
+else
+    echo "You are super user"
+fi
+
+
 
 
 
