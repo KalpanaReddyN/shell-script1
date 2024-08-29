@@ -1,6 +1,9 @@
 #!/bin/bash
 
 USERID=$(id -u)
+SCRIPT_NAME=$(echo $0 | cut -d '.' -f1)
+TIMESTAMP=$(date +%F-%H-%M-%S)
+LOGFILE=/tmp/$SCRIPT_NAME-$TIMESTAMP.log
 
 R="\e[31m"
 G="\e[32m"
@@ -30,10 +33,10 @@ VALIDATE(){
     fi
 }
 
-dnf install mysql -y
+dnf install mysql -y &>>LOGFILE
 VALIDATE $? "Installing mysql-server"
 
-dnf install git -y
+dnf install git -y &>>LOGFILE
 VALIDATE $? "Installing git"
 
 
