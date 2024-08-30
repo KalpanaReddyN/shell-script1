@@ -40,4 +40,4 @@ do
     fi
 done
 
-# give oackage names as arguments.
+# give package names as arguments.
