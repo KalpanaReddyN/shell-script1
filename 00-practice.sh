@@ -1,60 +1,21 @@
-#!/bin/bash
 
-LOGS_FOLDER="/var/log/shell-script"
-SCRIPT_NAME=$(echo $0 | cut -d "." -f1)
-TIMESTAMP=$(date +%Y-%m-%d-%H-%M-%S)
-LOG_FILE="$LOGS_FOLDER/$SCRIPT_NAME-$TIMESTAMP.log"
-mkdir -p $LOGS_FOLDER
+set -e
+
+failure(){
+    echo " failed at line $1::$2"
+} 
+
+trap 'failure ${LINENO} "$BASH_COMMAND"' ERR
 
 USERID=$(id -u)
-R="\e[31m"
-G="\e[32m"
-N="\e[0m"
-Y="\e[33m"
 
-CHECK_ROOT(){
-    if [ $USERID -ne 0 ]
-    then
-        echo -e "$R Please run this script with root priveleges $N" &>>LOG_FILE
-        exit 1
-    fi
-}
-
-VALIDATE(){
-    if [ $1 -ne 0 ]
-    then
-        echo -e "$2 is...$R FAILED $N"  &>>$LOGFILE
-        exit 1
-    else
-        echo -e "$2 is... $G SUCCESS $N" &>>$LOGFILE
-    fi
-}
-
-USAGE(){
-    echo -e "$R USAGE:: $N sudo sh 00-oractice.sh package1 package2 ..."
-    exit 1
-}
-
-echo "Script started executing at: $(date)" &>>$LOGFILE
-
-CHECK_ROOT
-
-if [ $# -eq 0 ]
-then
-    USAGE
+if [ $USERID -ne 0 ]
+then 
+    echo "Please run the script with root access"
+else
+    echo "You are super user"
 fi
 
-for package in $@ # $@ refers to all arguments passed to it
-do
-    dnf list installed $package &>>$LOG_FILE
-    if [ $? -ne 0 ]
-    then
-        echo "$package is not installed, going to install it.." &>>$LOGFILE
-        dnf install $package -y &>>$LOG_FILE
-        VALIDATE $? "Installing $package"
-    else
-        echo -e "$package is already $Y installed..nothing to do $N" &>>$LOGFILE
-    fi
-done
+dnf install mysqll -y
 
-
+echo "is script proceeding" 
