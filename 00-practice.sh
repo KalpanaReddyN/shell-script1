@@ -23,10 +23,10 @@ CHECK_ROOT(){
 VALIDATE(){
     if [ $1 -ne 0 ]
     then
-        echo -e "$2 is...$R FAILED $N" &>>$LOGFILE
+        echo -e "$2 is...$R FAILED $N" &>>$LOG_FILE
         exit 1
     else
-        echo -e "$2 is... $G SUCCESS $N" &>>$LOGFILE
+        echo -e "$2 is... $G SUCCESS $N" &>>$LOG_FILE
     fi
 }
 
@@ -35,7 +35,7 @@ USAGE(){
     exit 1
 }
 
-echo "Script started executing at: $(date)" &>>$LOGFILE
+echo "Script started executing at: $(date)" &>>$LOG_FILE
 
 CHECK_ROOT
 
@@ -49,11 +49,11 @@ do
     dnf list installed $package &>>$LOG_FILE
     if [ $? -ne 0 ]
     then
-        echo "$package is not installed, going to install it.." &>>$LOGFILE
+        echo "$package is not installed, going to install it.." &>>$LOG_FILE
         dnf install $package -y &>>$LOG_FILE
         VALIDATE $? "Installing $package"
     else
-        echo -e "$package is already $Y installed..nothing to do $N" &>>$LOGFILE
+        echo -e "$package is already $Y installed..nothing to do $N" &>>$LOG_FILE
     fi
 done
 
