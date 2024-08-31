@@ -35,14 +35,15 @@ USAGE(){
     exit 1
 }
 
-echo "Script started executing at: $(date)" | tee -a $LOG_FILE
-
-CHECK_ROOT
-
 if [ $# -eq 0 ]
 then
     USAGE
 fi
+
+echo "Script started executing at: $(date)" | tee -a $LOG_FILE
+
+CHECK_ROOT
+
 
 for package in $@ # $@ refers to all arguments passed to it
 do

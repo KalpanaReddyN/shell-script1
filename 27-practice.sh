@@ -1,20 +1,26 @@
-set -e
+#!/bin/bash
 
-failure(){
-    echo " failed at line $1::$2"
-} 
+SOURCE_DIRECTORY=/tmp/app-logs
 
-trap 'failure ${LINENO} "$BASH_COMMAND"' ERR
+R="\e[31m"
+G="\e[32m"
+Y="\e[33m"
+N="\e[0m"
 
-USERID=$(id -u)
-
-if [ $USERID -ne 0 ]
-then 
-    echo "Please run the script with root access"
+if [ -d $SOURCE_DIRECTORY ]    #-d: Checks if the specified path is an existing directory.
+then
+    echo "source directory exists"
 else
-    echo "You are super user"
+    echo "please make sure source directory exists"
 fi
 
-dnf install mysqll -y
+FILES=$(find $SOURCE_DIRECTORY -name "*.log" -mtime +14)
 
-echo "is script proceeding"
+echo "Files to delete: $FILES"
+
+while IFS= read -r line
+do
+    echo "Deleting file: $line"
+    rm -rf $line
+done <<< $FILES
+
