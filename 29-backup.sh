@@ -19,3 +19,20 @@ then
     USAGE
 fi
 
+if [ ! -d $SOURCE_DIRECTORY ]  # if -d $SOURCE_DIRECTORY is true and the ! make it false
+then
+    echo "$SOURCE_DIRECTORY doesn not exist..please check"
+fi
+
+if [ ! -d $DESTINATION_DIRECTORY ]
+then
+    echo "$DESTINATION_DIRECTORY doesn not exist..please check"
+fi
+
+FILES=$(find $SOURCE_DIRECTORY -name "*.log" -mtime +14)
+
+echo "Files: $FILES"
+
+
+
+
