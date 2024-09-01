@@ -23,5 +23,5 @@ echo "Files to delete: $FILES"
 while IFS= read -r file               # step3 using while loop step by step deleting the files
 do                                    # read -r line means giving line as delimeter and it will read line by line
     echo "Deleting file: $file"
-    rm $file
+    rm -rf $file
 done <<< $FILES
