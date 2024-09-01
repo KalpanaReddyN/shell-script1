@@ -7,8 +7,9 @@ FILE_TYPE="*.log"
 ZIP_FILE_NAME="old_files_$(date +%Y%m%d).zip"  # Name of the zip file with date
 
 # Ensure the destination directory exists
-if [ ! -d "$DEST_DIR" ]; then
-  mkdir -p "$DEST_DIR"
+if [ ! -d "$DEST_DIR" ]
+then
+    mkdir -p "$DEST_DIR"
 fi
 
 # Find old files and zip them
