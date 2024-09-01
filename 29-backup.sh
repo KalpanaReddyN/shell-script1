@@ -18,6 +18,7 @@ USAGE(){
 if [ $# -lt 2 ]
 then
     USAGE
+    exit 1
 fi
 
 if [ ! -d $SOURCE_DIRECTORY ]  # if -d $SOURCE_DIRECTORY is true and the ! make it false
