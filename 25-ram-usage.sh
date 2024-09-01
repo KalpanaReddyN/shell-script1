@@ -13,4 +13,4 @@ if [ $RAM_PERCENTAGE -ge $RAM_THRESHOLD ]
 then
     MESSAGE+="RAM usage is above $RAM_THRESHOLD %. current usage: $RAM_PERCENTAGE % ($USED_RAM MB of $TOTAL_RAM MB) "
     
-echo -e "message: $MESSAGE"
+echo "message: $MESSAGE"
