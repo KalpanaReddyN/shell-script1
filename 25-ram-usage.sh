@@ -7,7 +7,7 @@ MESSAGE=""
 TOTAL_RAM=$(echo $RAM_USAGE | awk -F " " '{print $2F}')
 USED_RAM=$(echo $RAM_USAGE | awk -F " " '{print $3F}')
 
-RAM_PERCENTAGE=$(( 100 * USED_RAM / TOTAL_RAM ))
+RAM_PERCENTAGE=$(( 100 * $USED_RAM / $TOTAL_RAM ))
 
 if [ $RAM_PERCENTAGE -ge $RAM_THRESHOLD ]
 then
