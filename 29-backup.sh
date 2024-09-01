@@ -2,7 +2,7 @@
 
 SOURCE_DIRECTORY=$1
 DESTINATION_DIRECTORY=$2
-DAYS=$(3:-14) # if $3 is empty, default is 14
+DAYS=${3:-14} # if $3 is empty, default is 14
 
 R="\e[31m"
 G="\e[32m"
