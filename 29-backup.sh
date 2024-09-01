@@ -3,6 +3,7 @@
 SOURCE_DIRECTORY=$1
 DESTINATION_DIRECTORY=$2
 DAYS=${3:-14} # if $3 is empty, default is 14
+TIMESTAMP=$(date +%F-%H-%M-%S)
 
 R="\e[31m"
 G="\e[32m"
@@ -29,15 +30,25 @@ then
     echo "$DESTINATION_DIRECTORY doesn not exist..please check"
 fi
 
-FILES=$(find $SOURCE_DIRECTORY -name "*.log" -mtime $DAYS)
+FILES=$(find $SOURCE_DIRECTORY -name "*.log" -mtime +14)
 
 echo "Files: $FILES"
 
 if [ ! -z $FILES] # -z prints true if FILES is empty, then ! makes the expression false
 then 
     echo "Files are found"
+    ZIP_FILES="$DESTINATION_DIRECTORY/logs-$TIMESTAMP.zip"
+    find ${SOURCE_DIRECTORY} -name "*.log" -mtime +14 |x zip "$ZIP_FILES" -@
+
+    #check if the zip file is successfully created or not
+    if [ -f $ZIP_FILES ]
+    then
+        echo "Successfully zipped files older then $DAYS"
+    fi
 else
     echo "No files older than $DAYS"
 fi
+
+
 
 
