@@ -29,7 +29,7 @@ then
     echo "$DESTINATION_DIRECTORY doesn not exist..please check"
 fi
 
-FILES=$(find $SOURCE_DIRECTORY -name "*.log" -mtime +14)
+FILES=$(find $SOURCE_DIRECTORY -name "*.log" -mtime $DAYS)
 
 echo "Files: $FILES"
 
