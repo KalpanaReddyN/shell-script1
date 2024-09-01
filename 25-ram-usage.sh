@@ -4,10 +4,10 @@ RAM_USAGE=$(free -m | grep -i "Mem:")
 RAM_THRESHOLD=80
 MESSAGE=""
 
-TOTAL_RAM=$(echo $RAM_USAGE | awk -F " " '{print $2F}')
-USED_RAM=$(echo $RAM_USAGE | awk -F " " '{print $3F}')
+TOTAL_RAM=$(echo $RAM_USAGE | awk '{print $2}')
+USED_RAM=$(echo $RAM_USAGE | awk '{print $3}')
 
-RAM_PERCENTAGE=$(( 100 * $USED_RAM / $TOTAL_RAM ))
+RAM_PERCENTAGE=$(( 100 * USED_RAM / TOTAL_RAM ))
 
 if [ $RAM_PERCENTAGE -ge $RAM_THRESHOLD ]
 then
