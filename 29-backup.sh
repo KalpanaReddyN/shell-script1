@@ -33,6 +33,11 @@ FILES=$(find $SOURCE_DIRECTORY -name "*.log" -mtime +14)
 
 echo "Files: $FILES"
 
-
+if [ ! -z $FILES] # -z prints true if FILES is empty, then ! makes the expression false
+then 
+    echo "Files are found"
+else
+    echo "No files older than $DAYS"
+fi
 
 
