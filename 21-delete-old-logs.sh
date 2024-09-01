@@ -20,8 +20,8 @@ FILES=$(find $SOURCE_DIRECTORY -name "*.log" -mtime +14)  #step2 showing which f
 echo "Files to delete: $FILES"
 
 
-while IFS= read -r line               # step3 using while loop step by step deleting the files
+while IFS= read -r file               # step3 using while loop step by step deleting the files
 do                                    # read -r line means giving line as delimeter and it will read line by line
-    echo "Deleting file: $line"
-    rm -rf $line
+    echo "Deleting file: $file"
+    rm -rf $file
 done <<< $FILES
