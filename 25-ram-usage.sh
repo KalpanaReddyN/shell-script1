@@ -12,5 +12,6 @@ RAM_PERCENTAGE=$(( 100 * $USED_RAM / $TOTAL_RAM ))
 if [ $RAM_PERCENTAGE -ge $RAM_THRESHOLD ]
 then
     MESSAGE+="RAM usage is above $RAM_THRESHOLD %. current usage: $RAM_PERCENTAGE % ($USED_RAM MB of $TOTAL_RAM MB) "
-    
+fi
+   
 echo "message: $MESSAGE"
