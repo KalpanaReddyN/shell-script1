@@ -6,7 +6,7 @@
 
 if [ $# -eq 0 ]
 then
-    echo "USAGE: $0 filename"
+    echo "USAGE: $0 <filename>"
     exit 1
 fi
 
