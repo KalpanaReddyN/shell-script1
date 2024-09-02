@@ -10,3 +10,5 @@ then
     exit 1
 fi
 
+cat $1 | tr -c '[:alnum:]' '[\n*]' | tr '[:upper:]' '[:lower:]' | sort | uniq -c | sort -nr | head -5
+
