@@ -42,7 +42,22 @@ then              # -z is true when it is empty, ! makes it false means non-empt
     echo "No files older than $DAYS"   
 else
     echo "Files are found:"
-    echo "$FILES"
+    ZIP_FILES="$DESTINATION_DIRECTORY/logs-$TIMESTAMP.zip"
+    find ${SOURCE_DIRECTORY} -name "*.log" -mtime +$DAYS | zip "$ZIP_FILES" -@
+
+    #check if the zip file is successfully created or not
+    if [ -f $ZIP_FILES ]
+    then
+        echo "Successfully zipped files older then $DAYS"
+        while IFS= read -r file               
+        do                                   
+            echo "Deleting file: $file"
+            rm -rf $file
+        done <<< $FILES
+    else
+        echo "Zipping the files is failed"
+        exit 1
+    fi
 fi
 
 
