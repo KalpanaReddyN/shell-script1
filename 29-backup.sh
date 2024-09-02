@@ -40,24 +40,24 @@ FILES=$(find $SOURCE_DIRECTORY -name "*.log" -mtime +14)
 echo "Files: $FILES"
 
 if [ ! -z $FILES] # -z prints true if FILES is empty, then ! makes the expression false
-then 
+then              # -z is true when it is empty, ! makes it false means non-empty, so this condition says files are found
     echo "Files are found"
-    ZIP_FILES="$DESTINATION_DIRECTORY/logs-$TIMESTAMP.zip"
-    find ${SOURCE_DIRECTORY} -name "*.log" -mtime +14 | zip "$ZIP_FILES" -@
+    # ZIP_FILES="$DESTINATION_DIRECTORY/logs-$TIMESTAMP.zip"
+    # find ${SOURCE_DIRECTORY} -name "*.log" -mtime +14 | zip "$ZIP_FILES" -@
 
-    #check if the zip file is successfully created or not
-    if [ -f $ZIP_FILES ]
-    then
-        echo "Successfully zipped files older then $DAYS"
-        while IFS= read -r file               
-        do                                   
-            echo "Deleting file: $file"
-            rm -rf $file
-        done <<< $FILES
-    else
-        echo "Zipping the files is failed"
-        exit 1
-    fi
+    # #check if the zip file is successfully created or not
+    # if [ -f $ZIP_FILES ]
+    # then
+    #     echo "Successfully zipped files older then $DAYS"
+    #     while IFS= read -r file               
+    #     do                                   
+    #         echo "Deleting file: $file"
+    #         rm -rf $file
+    #     done <<< $FILES
+    # else
+    #     echo "Zipping the files is failed"
+    #     exit 1
+    # fi
 else
     echo "No files older than $DAYS"
 fi
