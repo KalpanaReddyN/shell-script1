@@ -2,7 +2,7 @@
 
 SOURCE_DIRECTORY=$1
 DESTINATION_DIRECTORY=$2
-DAYS=${3:-14} # if $3 is empty, default is 14
+DAYS=${3:-14}        # if $3 is empty, default is 14
 TIMESTAMP=$(date +%F-%H-%M-%S)
 
 R="\e[31m"
@@ -24,39 +24,43 @@ fi
 if [ ! -d $SOURCE_DIRECTORY ]  # if -d $SOURCE_DIRECTORY is true and the ! make it false
 then
     echo "$SOURCE_DIRECTORY doesn not exist..please check"
+else
+    echo "$SOURCE_DIRECTORY exists"
 fi
 
 if [ ! -d $DESTINATION_DIRECTORY ]
 then
     echo "$DESTINATION_DIRECTORY doesn not exist..please check"
+else
+    echo "$DESTINATION_DIRECTORY exists"
 fi
 
 FILES=$(find $SOURCE_DIRECTORY -name "*.log" -mtime +14)
 
 echo "Files: $FILES"
 
-if [ ! -z $FILES] # -z prints true if FILES is empty, then ! makes the expression false
-then 
-    echo "Files are found"
-    ZIP_FILES="$DESTINATION_DIRECTORY/logs-$TIMESTAMP.zip"
-    find ${SOURCE_DIRECTORY} -name "*.log" -mtime +14 | zip "$ZIP_FILES" -@
+# if [ ! -z $FILES] # -z prints true if FILES is empty, then ! makes the expression false
+# then 
+#     echo "Files are found"
+#     ZIP_FILES="$DESTINATION_DIRECTORY/logs-$TIMESTAMP.zip"
+#     find ${SOURCE_DIRECTORY} -name "*.log" -mtime +14 | zip "$ZIP_FILES" -@
 
-    #check if the zip file is successfully created or not
-    if [ -f $ZIP_FILES ]
-    then
-        echo "Successfully zipped files older then $DAYS"
-        while IFS= read -r file               
-        do                                   
-            echo "Deleting file: $file"
-            rm -rf $file
-        done <<< $FILES
-    else
-        echo "Zipping the files is failed"
-        exit 1
-    fi
-else
-    echo "No files older than $DAYS"
-fi
+#     #check if the zip file is successfully created or not
+#     if [ -f $ZIP_FILES ]
+#     then
+#         echo "Successfully zipped files older then $DAYS"
+#         while IFS= read -r file               
+#         do                                   
+#             echo "Deleting file: $file"
+#             rm -rf $file
+#         done <<< $FILES
+#     else
+#         echo "Zipping the files is failed"
+#         exit 1
+#     fi
+# else
+#     echo "No files older than $DAYS"
+# fi
 
 
 
