@@ -35,15 +35,14 @@ else
     echo "$DESTINATION_DIRECTORY exists"
 fi
 
-FILES=$(find ${SOURCE_DIRECTORY} -name "*.log" -mtime +14)
+FILES=$(find ${SOURCE_DIRECTORY} -name "*.log" -mtime +$DAYS)
 
-echo "Files: $FILES"
-
-if [ ! -z $FILES ] # -z prints true if FILES is empty, then ! makes the expression false
+if [ -z $FILES ] # -z prints true if FILES is empty, then ! makes the expression false
 then              # -z is true when it is empty, ! makes it false means non-empty, so this condition says files are found
-    echo "Files are found"   
+    echo "No files older than $DAYS"   
 else
-    echo "No files older than $DAYS"
+    echo "Files are found:"
+    echo "$FILES"
 fi
 
 
