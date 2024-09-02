@@ -37,7 +37,7 @@ fi
 
 FILES=$(find ${SOURCE_DIRECTORY} -name "*.log" -mtime +$DAYS)
 
-if [ -z $FILES ] # -z prints true if FILES is empty, then ! makes the expression false
+if [ -z "$FILES" ] # -z prints true if FILES is empty, then ! makes the expression false
 then              # -z is true when it is empty, ! makes it false means non-empty, so this condition says files are found
     echo "No files older than $DAYS"   
 else
