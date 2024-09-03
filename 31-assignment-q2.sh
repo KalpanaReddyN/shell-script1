@@ -10,6 +10,19 @@ fi
 file=$1
 
 # Transpose the content
-transpose=$(cat "$file" | tr ' ' '\n' | paste -d ' ' - - -)
+awk '
+{
+    for (i = 1; i <= NF; i++) {
+        a[NR,i] = $i
+    }
+}
+NF > p { p = NF }
+END {
+    for(j = 1; j <= p; j++) {
+        for(i = 1; i <= NR; i++) {
+            printf "%s ", a[i,j]
+        }
+        printf "\n"
+    }
+}' "$file"
 
-echo "$transpose"
