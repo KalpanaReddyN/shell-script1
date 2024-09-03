@@ -10,4 +10,6 @@ fi
 file=$1
 
 # Transpose the content
-cat "$file" | tr ' ' '\n' | fmt -1 | paste -s -d' ' -
+transpose=$(cat "$file" | tr ' ' '\n' | paste -d ' ' - - -)
+
+echo "$transpose"
