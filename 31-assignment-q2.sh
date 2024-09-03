@@ -1,28 +1,41 @@
 #!/bin/bash
 
-# Check if a file is provided as an argument
-if [ $# -ne 1 ]; then
-    echo "Usage: $0 filename"
-    exit 1
+# Check if the file argument is provided
+if [ "$#" -ne 1 ]; then
+  echo "Usage: $0 file.txt"
+  exit 1
 fi
 
-# File to transpose
-file=$1
+input_file="$1"
 
-# Transpose the content
-awk '
+# Convert the file into a format suitable for transposing
+# Step 1: Convert spaces to tabs for easy processing
+tr ' ' '\t' < "$input_file" |
+# Step 2: Transpose the lines by treating tabs as delimiters
+# We need to align columns first
+paste -sd '\t' - |
+# Step 3: Convert tabs back to spaces and print
+# Split the transposed line into columns and print each as a row
+tr '\t' ' ' |
+# Step 4: Print each row correctly formatted
 {
-    for (i = 1; i <= NF; i++) {
-        a[NR,i] = $i
+  line_number=0
+  while IFS= read -r line; do
+    # Increase line_number to handle transposition
+    ((line_number++))
+    echo "$line" |
+    # Extract and print each column from the transposed line
+    {
+      column_number=1
+      while IFS= read -r column; do
+        if [ "$column_number" -eq 1 ]; then
+          echo -n "$column"
+        else
+          echo -n " $column"
+        fi
+        ((column_number++))
+      done <<< "$line"
+      echo
     }
+  done
 }
-NF > p { p = NF }
-END {
-    for(j = 1; j <= p; j++) {
-        for(i = 1; i <= NR; i++) {
-            printf "%s ", a[i,j]
-        }
-        printf "\n"
-    }
-}' "$file"
-
